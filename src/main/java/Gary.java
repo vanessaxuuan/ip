@@ -34,6 +34,20 @@ public class Gary {
                     items.get(Integer.parseInt(first[k]) - 1).toUnmark();
                     k++;
                 }
+            } else if (nxt.equals("delete")) {
+                System.out.println("Please key in what you would like to remove in descending order!");
+                try {
+                    String nums = sc.nextLine();
+                    String[] first = nums.split(" ");
+                    int k = 0;
+                    for (String str : first) {
+                        items.remove(Integer.parseInt(first[k]) - 1);
+                        k++;
+                    }
+                    Gary.printList(2, items);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Ah please enter a valid number or sequence e.g. 5 3 1");
+                }
 
             } else {
                 String[] type = nxt.split(" ");
