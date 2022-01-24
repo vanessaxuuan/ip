@@ -11,14 +11,10 @@ public class Gary {
 
         while (!nxt.equals("bye")) {
             if (nxt.equals("list")) {
-                System.out.println("To do list:");
-                int j = 1;
-                for (Task str : items) {
-                    System.out.printf("%d. %s\n", j, str);
-                    j++;
-                }
+                Gary.printList(1, items);
+
             } else if (nxt.equals("mark")) {
-                System.out.println("which tasks have you completed?");
+                System.out.println("which tasks have you completed? e.g. 2 3");
                 String nums = sc.nextLine();
                 String[] first = nums.split(" ");
                 int i = 0;
@@ -26,12 +22,7 @@ public class Gary {
                     items.get(Integer.parseInt(first[i]) - 1).toMark();
                     i++;
                 }
-                System.out.println("Alright, this is your updated to do list");
-                int j = 1;
-                for (Task str : items) {
-                    System.out.printf("%d. %s\n", j, str);
-                    j++;
-                }
+                Gary.printList(2, items);
 
             } else if (nxt.equals("unmark")) {
                 System.out.println("made some mistakes?");
@@ -44,10 +35,41 @@ public class Gary {
                 }
 
             } else {
-                items.add(new Task(nxt)); // store
+                String[] type = nxt.split(" ", 5);
+                String theTask = type[0];
+
+                switch(theTask) {
+                    case "todo" :
+                      items.add(new ToDo(type[1]));
+                      break;
+                    case "event" :
+                        String[] e = nxt.split("/", 5);
+                        items.add(new Event(e[0].substring(6), e[1]));
+                        break;
+                    case "deadline" :
+                        String[] d = nxt.split("/", 5);
+                        items.add(new Deadlines(d[0].substring(9), d[1]));
+                        break;
+                    default:
+                        System.out.println("please enter a valid task e.g. task_type name / date");
+                        break;
+                }
             }
             nxt = sc.nextLine(); // continue getting inputs
         }
         System.out.println("Bye, hope you stay productive!\n");
+    }
+
+    public static void printList(int type, ArrayList<Task> item) {
+        if(type == 1) {
+            System.out.println("Tasks:");
+        } else {
+            System.out.println("Alright, this is your updated to do list");
+        }
+        int j = 1;
+        for (Task str : item) {
+            System.out.printf("%d. %s\n", j, str);
+            j++;
+        }
     }
 }
