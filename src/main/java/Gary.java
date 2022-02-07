@@ -6,7 +6,13 @@ import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.File;
-
+import java.time.format.DateTimeParseException;
+import java.time.format.FormatStyle;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Gary {
     public static void main(String[] args) throws GaryException {
@@ -31,82 +37,90 @@ public class Gary {
             try {
 
                 if (nxt.equals("list")) {
-                        Gary.printList(1, items);
-                    } else if (nxt.equals("mark")) {
-                        System.out.println("which tasks have you completed? e.g. 2 3");
-                        String nums = sc.nextLine();
-                        String[] first = nums.split(" ");
-                        int i = 0;
-                        for (String str : first) {
-                            items.get(Integer.parseInt(first[i]) - 1).toMark();
-                            i++;
-                        }
-                        saveTask("./gary.txt", items);
-                        Gary.printList(2, items);
+                    Gary.printList(1, items);
+                } else if (nxt.equals("mark")) {
+                    System.out.println("which tasks have you completed? e.g. 2 3");
+                    String nums = sc.nextLine();
+                    String[] first = nums.split(" ");
+                    int i = 0;
+                    for (String str : first) {
+                        items.get(Integer.parseInt(first[i]) - 1).toMark();
+                        i++;
+                    }
+                    saveTask("./gary.txt", items);
+                    Gary.printList(2, items);
 
-                    } else if (nxt.equals("unmark")) {
-                        System.out.println("made some mistakes?");
+                } else if (nxt.equals("unmark")) {
+                    System.out.println("made some mistakes?");
+                    String nums = sc.nextLine();
+                    String[] first = nums.split(" ");
+                    int k = 0;
+                    for (String str : first) {
+                        items.get(Integer.parseInt(first[k]) - 1).toUnmark();
+                        k++;
+                    }
+                    saveTask("./gary.txt", items);
+
+                } else if (nxt.equals("delete")) {
+                    System.out.println("Please key in what you would like to remove in descending order!");
+                    try {
                         String nums = sc.nextLine();
                         String[] first = nums.split(" ");
                         int k = 0;
                         for (String str : first) {
-                            items.get(Integer.parseInt(first[k]) - 1).toUnmark();
+                            items.remove(Integer.parseInt(first[k]) - 1);
                             k++;
                         }
-                        saveTask("./gary.txt", items);
-
-                    } else if (nxt.equals("delete")) {
-                        System.out.println("Please key in what you would like to remove in descending order!");
-                        try {
-                            String nums = sc.nextLine();
-                            String[] first = nums.split(" ");
-                            int k = 0;
-                            for (String str : first) {
-                                items.remove(Integer.parseInt(first[k]) - 1);
-                                k++;
-                            }
-                            Gary.printList(2, items);
-                        } catch (IndexOutOfBoundsException e) {
-                            System.out.println("Ah please enter a valid number or sequence e.g. 5 3 1");
-                        }
-                        saveTask("./gary.txt", items);
-
-                    } else {
-                        String[] type = nxt.split(" ");
-                        String theTask = type[0];
-                        try {
-                            if (!theTask.equals("todo") && !theTask.equals("event") && !theTask.equals("deadline")) {
-                                throw new GaryException(nxt); // invalid input
-                            }
-                        } catch (GaryException e) {
-                            e.GaryError();
-                        }
-
-                        try {
-                            switch (theTask) {
-                                case "todo":
-                                    items.add(new ToDo(nxt.substring(5)));
-                                    break;
-                                case "event":
-                                    String[] e = nxt.split("/", 5);
-                                    items.add(new Event(e[0].substring(6), e[1]));
-                                    break;
-                                case "deadline":
-                                    String[] d = nxt.split("/", 5);
-                                    items.add(new Deadlines(d[0].substring(9), d[1]));
-                                    break;
-                            }
-                            saveTask("./gary.txt", items);
-                        } catch (StringIndexOutOfBoundsException e) {
-                            System.out.println("Ah please enter a valid description e.g. task_type name / date");
-                        }
+                        Gary.printList(2, items);
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("Ah please enter a valid number or sequence e.g. 5 3 1");
                     }
-                    nxt = sc.nextLine(); // continue getting inputs
-                } catch (IOException e) {
-                    File newFile = new File("./gary.txt");
-                    System.out.println("please try again");
+                    saveTask("./gary.txt", items);
+
+                } else {
+                    String[] type = nxt.split(" ");
+                    String theTask = type[0];
+                    try {
+                        if (!theTask.equals("todo") && !theTask.equals("event") && !theTask.equals("deadline")) {
+                            throw new GaryException(nxt); // invalid input
+                        }
+                    } catch (GaryException e) {
+                        e.GaryError();
+                    }
+
+                    try {
+                        switch (theTask) {
+                            case "todo":
+                                items.add(new ToDo(nxt.substring(5)));
+                                break;
+                            case "event":
+                                String[] e = nxt.split("/", 5);
+                                DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy,HHmm");
+                                LocalDateTime e1 = LocalDateTime.parse(e[1].strip(), inputFormat);
+                                DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("dd LLL yyyy HH:mm a");
+                                items.add(new Event(e[0].substring(6), e1.format(outputFormat)));
+                                break;
+                            case "deadline":
+                                String[] d = nxt.split("/", 5);
+                                DateTimeFormatter inFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy,HHmm");
+                                LocalDateTime d1 = LocalDateTime.parse(d[1].strip(), inFormat);
+                                DateTimeFormatter outFormat = DateTimeFormatter.ofPattern("dd LLL yyyy HH:mm a");
+                                items.add(new Deadlines(d[0].substring(9), d1.format(outFormat)));
+                                break;
+                        }
+                        saveTask("./gary.txt", items);
+                    } catch (StringIndexOutOfBoundsException e) {
+                        System.out.println("Ah please enter a valid description e.g. task_type name / date");
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Ah please enter a valid date e.g. 19-01-2022,2359");
+                    }
                 }
-        }
+            } catch (IOException e) {
+                File newFile = new File("./gary.txt");
+                System.out.println("please try again");
+            }
+                nxt = sc.nextLine(); // continue getting inputs
+            }
         System.out.println("Bye, hope you stay productive!\n");
     }
 
