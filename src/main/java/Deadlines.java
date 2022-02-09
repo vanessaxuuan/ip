@@ -1,3 +1,5 @@
+package gary;
+import gary.Task;
 public class Deadlines extends Task {
     String date;
 
@@ -8,6 +10,6 @@ public class Deadlines extends Task {
 
     @Override
     public String toString() {
-        return "D" + super.toString() + "by: " + date;
+        return "D" + super.toString() + " by: " + date;
     }
 }

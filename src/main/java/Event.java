@@ -1,3 +1,5 @@
+package gary;
+import gary.Task;
 public class Event extends Task {
     String date;
 
@@ -8,6 +10,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "E" + super.toString() + "on: " + date;
+        return "E" + super.toString() + " on: " + date;
     }
 }

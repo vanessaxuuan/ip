@@ -1,3 +1,4 @@
+package gary;
 import java.lang.Exception;
 
 public class GaryException extends Exception {

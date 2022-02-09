@@ -1,4 +1,4 @@
-import java.util.*;
+package gary;
 
 public class Task {
     protected String task;
