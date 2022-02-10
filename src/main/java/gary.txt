@@ -1,0 +1,5 @@
+1. T[X] run
+2. E[X] party   on:     12 Dec 2001 23:59 pm
+3. T[X] sleep
+4. E[X] party   on:   01 Jan 2001 01:00 am
+5. T[ ] run and nap
