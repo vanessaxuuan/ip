@@ -46,7 +46,7 @@ public class TaskList {
                     break;
                 case 'D':
                     String[] d = str.split("by:", 5);
-                    this.tasks.add(new Deadlines(d[0].substring(8), d[1]));
+                    this.tasks.add(new Deadline(d[0].substring(8), d[1]));
                     break;
             }
             if (isDone) {
@@ -130,7 +130,7 @@ public class TaskList {
      * @param date due date
      */
     public void addDeadline(String d, String date) {
-        tasks.add(new Deadlines(d, date));
+        tasks.add(new Deadline(d, date));
         Storage.saveTask(tasks);
     }
 

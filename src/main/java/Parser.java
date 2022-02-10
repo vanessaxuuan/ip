@@ -35,17 +35,11 @@ public class Parser {
                     break;
                 case "event":
                     String[] e = input.split("/", 5);
-                    DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy,HHmm");
-                    LocalDateTime e1 = LocalDateTime.parse(e[1].strip(), inputFormat);
-                    DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("dd LLL yyyy HH:mm a");
-                    tsk.addEvent(e[0].substring(6), e1.format(outputFormat));
+                    tsk.addEvent(e[0].substring(6), parseDate(e));
                     break;
                 case "deadline":
                     String[] d = input.split("/", 5);
-                    DateTimeFormatter inFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy,HHmm");
-                    LocalDateTime d1 = LocalDateTime.parse(d[1].strip(), inFormat);
-                    DateTimeFormatter outFormat = DateTimeFormatter.ofPattern("dd LLL yyyy HH:mm a");
-                    tsk.addDeadline(d[0].substring(9), d1.format(outFormat));
+                    tsk.addDeadline(d[0].substring(9), parseDate(d));
                     break;
                 default:
                     command = input;
@@ -57,5 +51,19 @@ public class Parser {
             System.out.println("Ah please enter a valid date e.g. 19-01-2022,2359");
         }
         return false;
+    }
+
+    /**
+     * Convert representation of date and time
+     * e.g. from 19-01-2001,2359 to 19 Jan 2001 23:59pm
+     *
+     * @param d User input
+     * @return date and time
+     */
+    private String parseDate(String[] d) {
+        DateTimeFormatter inFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy,HHmm");
+        LocalDateTime d1 = LocalDateTime.parse(d[1].strip(), inFormat);
+        DateTimeFormatter outFormat = DateTimeFormatter.ofPattern("dd LLL yyyy HH:mm a");
+        return d1.format(outFormat);
     }
 }
