@@ -7,6 +7,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Represents a storage for files used by Gary
+ * Access history of chat-bot to provide
+ * user with pre-recorded/incomplete to-do list
+ */
 public class Storage {
     private static String file;
 
@@ -14,6 +19,10 @@ public class Storage {
         file = path;
     }
 
+    /**
+     * Access and loads the content of the saved file
+     * @return content of file
+     */
     public ArrayList<String> loadFile() {
         ArrayList<String> content = new ArrayList<>();
         try {
@@ -29,6 +38,10 @@ public class Storage {
         return content;
     }
 
+    /**
+     * Saves updated TaskList in the File
+     * @param list TaskList to be saved
+     */
     public static void saveTask(ArrayList<Task> list) {
         try {
             FileWriter fw = new FileWriter(file);

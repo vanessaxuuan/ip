@@ -10,6 +10,10 @@ import gary.GaryException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a list of tasks to be done by user
+ * Contains a set of operations to be performed on the list
+ */
 public class TaskList {
     public ArrayList<Task> tasks;
 
@@ -18,6 +22,9 @@ public class TaskList {
         this.decode(t);
     }
 
+    /**
+     * @param lst List of Strings to be decoded into commands
+     */
     public void decode(ArrayList<String> lst) {
         for (String str : lst) {
             char type = str.charAt(3);
@@ -42,6 +49,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * @param method operation to be performed
+     * @throws GaryException if method is invalid
+     */
     public void invoke(String method) throws GaryException {
         switch (method) {
             case "bye":
@@ -63,6 +74,9 @@ public class TaskList {
         }
     }
 
+    /**
+     * @param x type of message to be printed
+     */
     public void printList(int x) {
         String msg = x == 1 ? "Welcome back, this is your current to-do list:" : "to do list:";
         if (this.tasks.isEmpty()) {
@@ -77,21 +91,35 @@ public class TaskList {
         }
     }
 
+    /**
+     * @param t task to do
+     */
     public void addTodo(String t) {
         tasks.add(new ToDo(t));
         Storage.saveTask(tasks);
     }
 
+    /**
+     * @param e Event to add
+     * @param date day of event
+     */
     public void addEvent(String e, String date) {
         tasks.add(new Event(e, date));
         Storage.saveTask(tasks);
     }
 
+    /**
+     * @param d DeadLines to add
+     * @param date due date
+     */
     public void addDeadline(String d, String date) {
         tasks.add(new Deadlines(d, date));
         Storage.saveTask(tasks);
     }
 
+    /**
+     * Deletes unnecessary tasks
+     */
     public void delete() {
         System.out.println("Please key in what you would like to remove in descending order!");
         try {
@@ -112,6 +140,9 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks completed task as done
+     */
     public void mark() {
         System.out.println("which tasks have you completed? e.g. 2 3");
         Scanner sc = new Scanner(System.in);
@@ -127,6 +158,9 @@ public class TaskList {
         printList(2);
     }
 
+    /**
+     * Undo marking
+     */
     public void unmark() {
         System.out.println("made some mistakes, which tasks would you want to un-mark?");
         Scanner sc = new Scanner(System.in);

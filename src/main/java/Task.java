@@ -1,5 +1,9 @@
 package gary;
 
+/**
+ * Represents a task
+ * A completed task e.g. [X] task_name
+ */
 public class Task {
     protected String task;
     protected boolean isDone;

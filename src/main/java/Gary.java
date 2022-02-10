@@ -7,6 +7,9 @@ import gary.GaryException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a chat-bot that manages your daily to-do list
+ */
 public class Gary {
 
     private static Storage storage;
@@ -14,6 +17,10 @@ public class Gary {
     private static Ui ui;
     private static Parser parser;
 
+    /**
+     * Initializes Storage, TaskList, Ui and Parser required
+     * @param filePath file path to file containing history of chat-bot
+     */
     public Gary(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);

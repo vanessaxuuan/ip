@@ -8,12 +8,19 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Helps to decode the user input and
+ * invoke the corresponding operation to be done
+ */
 public class Parser {
     String command = "";
 
-    public Parser() {
-    }
-
+    /**
+     * Parse user input
+     * @param input User input
+     * @param tsk TaskList to be used
+     * @return indication to end of user input
+     */
     public boolean parse(String input, TaskList tsk) {
         try {
             String[] type = input.split(" ");
