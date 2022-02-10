@@ -9,6 +9,8 @@ import java.util.Scanner;
 public class Ui {
 
     /**
+     * Prints welcome message and history
+     *
      * @param tsk TaskList saved in history
      */
     public void welcomeUser(TaskList tsk) {
@@ -17,6 +19,8 @@ public class Ui {
     }
 
     /**
+     * Get user input
+     *
      * @param par Parser to be used
      * @param tsk TaskList to be updated
      * @return indication to end of user input

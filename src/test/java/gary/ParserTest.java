@@ -6,10 +6,13 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * Test for correctness of gary.Parser class
+ */
 public class ParserTest {
 
     /**
-     * Test for the correctness of gary.Parser class
+     * Test for the correctness of parse() method
      * Checking if User Input "bye" will terminate chat-bot
      */
     @Test

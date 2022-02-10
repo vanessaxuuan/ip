@@ -4,13 +4,16 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * Test for the correctness of gary.Task
+ */
 public class TaskTest {
 
     /**
      * Test for the correctness of gary.Task.mark() method
      */
     @Test
-    public void markingTest() {
+    public void markTest() {
         Task t = new Task("testing");
         t.toMark();
         assertEquals("[X] testing", t.toString());
@@ -20,7 +23,7 @@ public class TaskTest {
      * Test for the correctness of gary.Task.unmark() method
      */
     @Test
-    public void unmarkingTest() {
+    public void unmarkTest() {
         Task t = new Task("un-mark");
         t.toMark();
         t.toUnmark();

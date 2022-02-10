@@ -15,12 +15,18 @@ import java.util.Scanner;
 public class Storage {
     private static String file;
 
+    /**
+     * Constructs a new Storage object
+     *
+     * @param path path to file
+     */
     public Storage(String path) {
         file = path;
     }
 
     /**
      * Access and loads the content of the saved file
+     *
      * @return content of file
      */
     public ArrayList<String> loadFile() {
@@ -40,6 +46,7 @@ public class Storage {
 
     /**
      * Saves updated TaskList in the File
+     *
      * @param list TaskList to be saved
      */
     public static void saveTask(ArrayList<Task> list) {

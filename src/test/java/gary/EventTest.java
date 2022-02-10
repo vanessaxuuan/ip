@@ -4,10 +4,13 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * Test for the correctness of gary.Event class
+ */
 public class EventTest {
 
     /**
-     * Test for the correctness of gary.Event class
+     * Test for the correctness of Event constructor and toString method
      */
     @Test
     public void testEvent() {

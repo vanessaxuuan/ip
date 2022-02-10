@@ -1,7 +1,7 @@
 package gary;
 import gary.ToDo;
 import gary.Event;
-import gary.Deadlines;
+import gary.Deadline;
 import gary.TaskList;
 import gary.GaryException;
 import java.time.LocalDateTime;
@@ -13,10 +13,11 @@ import java.time.format.DateTimeParseException;
  * invoke the corresponding operation to be done
  */
 public class Parser {
-    String command = "";
+    private String command = "";
 
     /**
      * Parse user input
+     *
      * @param input User input
      * @param tsk TaskList to be used
      * @return indication to end of user input

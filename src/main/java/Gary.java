@@ -19,6 +19,7 @@ public class Gary {
 
     /**
      * Initializes Storage, TaskList, Ui and Parser required
+     *
      * @param filePath file path to file containing history of chat-bot
      */
     public Gary(String filePath) {
@@ -28,11 +29,22 @@ public class Gary {
         tasks = new TaskList(storage.loadFile());
     }
 
+    /**
+     * Instantiate a new Gary chat-bot
+     * Runs the chat-bot
+     *
+     * @param args User input
+     * @throws GaryException
+     */
     public static void main(String[] args) throws GaryException {
         new Gary("./gary.txt").run();
     }
 
-    public static void run() {
+    /**
+     * Start Gary by getting User input
+     * Exit chat-bot when user inputs "bye"
+     */
+    private static void run() {
         boolean isEnd = false;
         ui.welcomeUser(tasks);
         while (!isEnd) {

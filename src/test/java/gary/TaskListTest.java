@@ -6,12 +6,14 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * Test for the correctness of gary.TaskList class
+ */
 public class TaskListTest {
     private ArrayList<String> commands;
     private gary.TaskList lst;
 
     /**
-     * Test for the correctness of gary.TaskList class
      * Check if gary.TaskList.invoke() is able to detect invalid input
      */
     @Test
@@ -22,7 +24,7 @@ public class TaskListTest {
             lst = new gary.TaskList(commands);
             lst.invoke("hello");
         } catch (GaryException e) {
-            assertEquals("hello", e.msg);
+            assertEquals("hello", e.getMessage());
         }
     }
 }

@@ -1,7 +1,7 @@
 package gary;
 import gary.ToDo;
 import gary.Event;
-import gary.Deadlines;
+import gary.Deadline;
 import gary.Task;
 import gary.GaryException;
 import gary.Storage;
@@ -17,12 +17,19 @@ import java.util.Scanner;
 public class TaskList {
     public ArrayList<Task> tasks;
 
+    /**
+     * Constructs a new TaskList from a List of String
+     *
+     * @param t List of String to be decoded
+     */
     public TaskList(ArrayList<String> t) {
         tasks = new ArrayList<Task>();
         this.decode(t);
     }
 
     /**
+     * Convert List of Strings into List of Tasks
+     *
      * @param lst List of Strings to be decoded into commands
      */
     public void decode(ArrayList<String> lst) {
@@ -50,6 +57,8 @@ public class TaskList {
     }
 
     /**
+     * Calls the method corresponding to user input
+     *
      * @param method operation to be performed
      * @throws GaryException if method is invalid
      */
@@ -75,6 +84,8 @@ public class TaskList {
     }
 
     /**
+     * Prints out Task List
+     *
      * @param x type of message to be printed
      */
     public void printList(int x) {
@@ -92,6 +103,8 @@ public class TaskList {
     }
 
     /**
+     * Adds a ToDo Task
+     *
      * @param t task to do
      */
     public void addTodo(String t) {
@@ -100,6 +113,8 @@ public class TaskList {
     }
 
     /**
+     * Adds an Event Task
+     *
      * @param e Event to add
      * @param date day of event
      */
@@ -109,6 +124,8 @@ public class TaskList {
     }
 
     /**
+     * Adds a Deadline Task
+     *
      * @param d DeadLines to add
      * @param date due date
      */
