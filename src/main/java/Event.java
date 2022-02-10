@@ -20,6 +20,18 @@ public class Event extends Task {
     }
 
     /**
+     * Checks if Event name or date matches a specific keyword
+     * Invoked by gary.TaskList::find
+     *
+     * @param str keyword
+     * @return Whether the Event contains a specific keyword
+     */
+    @Override
+    public boolean contain(String str) {
+        return date.contains(str) || super.contain(str);
+    }
+
+    /**
      * Represents Event as a String object
      * e.g. E[X] event_name on: 05-12-2022 23:59pm
      *

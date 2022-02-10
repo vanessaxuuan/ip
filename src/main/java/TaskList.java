@@ -64,8 +64,6 @@ public class TaskList {
      */
     public void invoke(String method) throws GaryException {
         switch (method) {
-            case "bye":
-
             case "list":
                 this.printList(2);
                 break;
@@ -191,5 +189,24 @@ public class TaskList {
         Storage.saveTask(tasks);
         System.out.print("Alright, this is your updated ");
         printList(2);
+    }
+
+    /**
+     * Print out Tasks that contains keyword
+     *
+     * @param keyword
+     */
+    public void find(String keyword) {
+        int i = 0;
+        System.out.println("Here are the matching tasks in your list:");
+        for(Task t : tasks) {
+            if (t.contain(keyword)) {
+                i++;
+                System.out.printf("%d. %s\n", i, t.toString());
+            }
+        }
+        if (i == 0) {
+            System.out.println("no match found :(");
+        }
     }
 }

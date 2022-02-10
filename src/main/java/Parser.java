@@ -41,6 +41,9 @@ public class Parser {
                     String[] d = input.split("/", 5);
                     tsk.addDeadline(d[0].substring(9), parseDate(d));
                     break;
+                case "find":
+                    tsk.find(input.substring(5));
+                    break;
                 default:
                     command = input;
                     tsk.invoke(input);

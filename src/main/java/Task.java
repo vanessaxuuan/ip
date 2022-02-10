@@ -33,6 +33,17 @@ public class Task {
     }
 
     /**
+     * Checks if the Task matches a specific keyword
+     * Invoked by gary.TaskList::find
+     *
+     * @param str keyword
+     * @return Whether the Task contains a specific keyword
+     */
+    public boolean contain(String str) {
+        return task.contains(str);
+    }
+
+    /**
      * Represents Task as a String object
      * Completed Task e.g. [X] task_name
      *
