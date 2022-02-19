@@ -13,7 +13,7 @@ import java.time.format.DateTimeParseException;
  * invoke the corresponding operation to be done
  */
 public class Parser {
-    private String command = "";
+    private static String command = "";
 
     /**
      * Parse user input
@@ -22,38 +22,30 @@ public class Parser {
      * @param tsk TaskList to be used
      * @return indication to end of user input
      */
-    public boolean parse(String input, TaskList tsk) {
+    public String parse(String input, TaskList tsk) throws GaryException {
         try {
             String[] type = input.split(" ");
             String theTask = type[0];
             switch (theTask) {
                 case "bye":
-                    System.out.println("Bye, have a productive day!");
-                    return true;
+                    return "Bye, have a productive day!";
                 case "todo":
-                    tsk.addTodo(input.substring(5));
-                    break;
+                    return tsk.addTodo(input.substring(5));
                 case "event":
                     String[] e = input.split("/", 5);
-                    tsk.addEvent(e[0].substring(6), parseDate(e));
-                    break;
+                    return tsk.addEvent(e[0].substring(6), parseDate(e));
                 case "deadline":
                     String[] d = input.split("/", 5);
-                    tsk.addDeadline(d[0].substring(9), parseDate(d));
-                    break;
+                    return tsk.addDeadline(d[0].substring(9), parseDate(d));
                 case "find":
-                    tsk.find(input.substring(5));
-                    break;
-                default:
-                    command = input;
-                    tsk.invoke(input);
+                    return tsk.find(input.substring(5));
             }
-        } catch (StringIndexOutOfBoundsException | GaryException e) {
+        } catch (StringIndexOutOfBoundsException e) {
             System.out.println("Ah please enter a valid description e.g. task_type name / date");
         } catch (DateTimeParseException e) {
             System.out.println("Ah please enter a valid date e.g. 19-01-2022,2359");
         }
-        return false;
+        return tsk.invoke(input);
     }
 
     /**
@@ -63,7 +55,7 @@ public class Parser {
      * @param d User input
      * @return date and time
      */
-    private String parseDate(String[] d) {
+    private static String parseDate(String[] d) {
         DateTimeFormatter inFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy,HHmm");
         LocalDateTime d1 = LocalDateTime.parse(d[1].strip(), inFormat);
         DateTimeFormatter outFormat = DateTimeFormatter.ofPattern("dd LLL yyyy HH:mm a");

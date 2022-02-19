@@ -8,6 +8,7 @@ import gary.Storage;
 import gary.TaskList;
 import gary.GaryException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Scanner;
 
 /**
@@ -15,7 +16,7 @@ import java.util.Scanner;
  * Contains a set of operations to be performed on the list
  */
 public class TaskList {
-    public ArrayList<Task> tasks;
+    public static ArrayList<Task> tasks;
 
     /**
      * Constructs a new TaskList from a List of String
@@ -59,25 +60,26 @@ public class TaskList {
     /**
      * Calls the method corresponding to user input
      *
-     * @param method operation to be performed
+     * @param input operation to be performed
      * @throws GaryException if method is invalid
      */
-    public void invoke(String method) throws GaryException {
-        switch (method) {
+    public String invoke(String input) throws GaryException {
+        String[] type = input.split(" ");
+        switch (type[0]) {
             case "list":
-                this.printList(2);
-                break;
+                return this.showList(2);
             case "mark":
-                this.mark();
-                break;
+                return this.mark(input);
             case "unmark":
-                this.unmark();
-                break;
+                return this.unmark(input);
             case "delete":
-                this.delete();
-                break;
+                return this.delete(input);
+            case "help":
+                return showHelp();
+            case "refresh":
+                return deleteAll();
             default:
-                throw new GaryException(method);
+                throw new GaryException(input);
         }
     }
 
@@ -86,18 +88,19 @@ public class TaskList {
      *
      * @param x type of message to be printed
      */
-    public void printList(int x) {
+    public String showList(int x) {
         String msg = x == 1 ? "Welcome back, this is your current to-do list:" : "to do list:";
         if (this.tasks.isEmpty()) {
-            System.out.println("No history recorded, what would you like to do today?");
+            return "No history recorded, what would you like to do today?";
         } else {
-            System.out.println(msg);
             int i = 1;
             for (Task curr : this.tasks) {
-                System.out.printf("%d: %s\n", i, curr);
+                msg += System.lineSeparator();
+                msg += i + ". " + curr.toString();
                 i++;
             }
         }
+        return msg;
     }
 
     /**
@@ -105,9 +108,11 @@ public class TaskList {
      *
      * @param t task to do
      */
-    public void addTodo(String t) {
-        tasks.add(new ToDo(t));
+    public String addTodo(String t) {
+        ToDo next = new ToDo(t);
+        tasks.add(next);
         Storage.saveTask(tasks);
+        return "task added!";
     }
 
     /**
@@ -116,9 +121,11 @@ public class TaskList {
      * @param e Event to add
      * @param date day of event
      */
-    public void addEvent(String e, String date) {
-        tasks.add(new Event(e, date));
+    public String addEvent(String e, String date) {
+        Event next = new Event(e,date);
+        tasks.add(next);
         Storage.saveTask(tasks);
+        return "task added!";
     }
 
     /**
@@ -127,68 +134,56 @@ public class TaskList {
      * @param d DeadLines to add
      * @param date due date
      */
-    public void addDeadline(String d, String date) {
-        tasks.add(new Deadline(d, date));
+    public String addDeadline(String d, String date) {
+        Deadline next = new Deadline(d,date);
+        tasks.add(next);
         Storage.saveTask(tasks);
+        return "task added!";
     }
 
     /**
      * Deletes unnecessary tasks
      */
-    public void delete() {
-        System.out.println("Please key in what you would like to remove in descending order!");
+    public String delete(String input) {
+        String[] seq = input.split(" ");
         try {
-            Scanner sc = new Scanner(System.in);
-            String nums = sc.nextLine();
-            String[] first = nums.split(" ");
-            int k = 0;
-            for (String str : first) {
-                tasks.remove(Integer.parseInt(first[k]) - 1);
-                k++;
+            int len = seq.length;
+            for(int i = 1; i < len; i++) {
+                tasks.remove(Integer.parseInt(seq[i]) - 1);
             }
-            printList(2);
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Ah please enter a valid number or sequence e.g. 5 3 1");
         }
         if(!tasks.isEmpty()) {
             Storage.saveTask(tasks);
         }
+        return "Done!";
     }
 
     /**
      * Marks completed task as done
      */
-    public void mark() {
-        System.out.println("which tasks have you completed? e.g. 2 3");
-        Scanner sc = new Scanner(System.in);
-        String nums = sc.nextLine();
-        String[] first = nums.split(" ");
-        int i = 0;
-        for (String str : first) {
-            tasks.get(Integer.parseInt(first[i]) - 1).toMark();
-            i++;
+    public String mark(String input) {
+        String[] seq = input.split(" ");
+        int len = seq.length;
+        for(int i = 1; i < len; i++) {
+            tasks.get(Integer.parseInt(seq[i]) - 1).toMark();
         }
         Storage.saveTask(tasks);
-        System.out.print("Alright, this is your updated ");
-        printList(2);
+        return "Alright, updated!";
     }
 
     /**
      * Undo marking
      */
-    public void unmark() {
-        System.out.println("made some mistakes, which tasks would you want to un-mark?");
-        Scanner sc = new Scanner(System.in);
-        String nums = sc.nextLine();
-        String[] first = nums.split(" ");
-        int k = 0;
-        for (String str : first) {
-            tasks.get(Integer.parseInt(first[k]) - 1).toUnmark();
-            k++;
+    public String unmark(String input) {
+        String[] seq = input.split(" ");
+        int len = seq.length;
+        for(int i = 1; i < len; i++) {
+            tasks.get(Integer.parseInt(seq[i]) - 1).toUnmark();
         }
         Storage.saveTask(tasks);
-        System.out.print("Alright, this is your updated ");
-        printList(2);
+        return "Alright, updated!";
     }
 
     /**
@@ -196,17 +191,43 @@ public class TaskList {
      *
      * @param keyword
      */
-    public void find(String keyword) {
+    public String find(String keyword) {
+        String end = "Here are the matching tasks in your list:" + System.lineSeparator();
         int i = 0;
-        System.out.println("Here are the matching tasks in your list:");
         for(Task t : tasks) {
             if (t.contain(keyword)) {
                 i++;
-                System.out.printf("%d. %s\n", i, t.toString());
+                end += t.toString() + System.lineSeparator();
             }
         }
         if (i == 0) {
-            System.out.println("no match found :(");
+            end = "no match found :(";
         }
+        return end;
+    }
+
+    public String showHelp() {
+        String help = "Chat with me!!!" + System.lineSeparator();
+        help += System.lineSeparator();
+        help += "add Tasks:" + System.lineSeparator();
+        help += "[todo task_name]" + System.lineSeparator();
+        help += "[event name / 19-01-2022,2359]" + System.lineSeparator();
+        help += "[deadline name / 19-01-2022,2359]" + System.lineSeparator();
+        help += System.lineSeparator();
+
+        help += "more functions:" + System.lineSeparator();
+        help += "[list]: list out current todo-list" + System.lineSeparator();
+        help += "[delete 2 1]: delete tasks 2 and 1 (descending order) " + System.lineSeparator();
+        help += "[refresh]: delete all tasks" + System.lineSeparator();
+        help += "[mark 2 3]: indicating tasks 2 & 3 as done" + System.lineSeparator();
+        help += "[unmark 2 3]: indicating tasks 2 & 3 as incomplete (default)" + System.lineSeparator();
+        help += "[find key word]: find tasks related to keyword(s)";
+        return help;
+    }
+
+    public String deleteAll() {
+        tasks.clear();
+        Storage.saveTask(tasks);
+        return "To-Do List cleared! What would you like to do today? ^^";
     }
 }

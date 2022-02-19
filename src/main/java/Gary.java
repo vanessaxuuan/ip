@@ -13,9 +13,9 @@ import java.util.Scanner;
 public class Gary {
 
     private static Storage storage;
-    private static TaskList tasks;
+    protected static TaskList tasks;
     private static Ui ui;
-    private static Parser parser;
+    protected static Parser parser;
 
     /**
      * Initializes Storage, TaskList, Ui and Parser required
@@ -29,26 +29,4 @@ public class Gary {
         tasks = new TaskList(storage.loadFile());
     }
 
-    /**
-     * Instantiate a new Gary chat-bot
-     * Runs the chat-bot
-     *
-     * @param args User input
-     * @throws GaryException
-     */
-    public static void main(String[] args) throws GaryException {
-        new Gary("./gary.txt").run();
-    }
-
-    /**
-     * Start Gary by getting User input
-     * Exit chat-bot when user inputs "bye"
-     */
-    private static void run() {
-        boolean isEnd = false;
-        ui.welcomeUser(tasks);
-        while (!isEnd) {
-            isEnd = ui.startBot(parser, tasks);
-        }
-    }
 }

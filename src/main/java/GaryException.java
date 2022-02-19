@@ -20,8 +20,8 @@ public class GaryException extends Exception {
     /**
      * Prints out error message
      */
-    public void garyError() {
-        System.out.printf("Sorry, what is %s ?\n", this.msg);
+    public String garyError() {
+        return "Sorry, what is " + this.msg;
     }
 
     /**

@@ -17,8 +17,12 @@ public class ParserTest {
      */
     @Test
     public void testBye() {
-        Parser p = new Parser();
-        TaskList t = new TaskList(new ArrayList<String>());
-        assertEquals(true, p.parse("bye", t));
+        try {
+            Parser p = new Parser();
+            TaskList t = new TaskList(new ArrayList<String>());
+            assertEquals("Bye, have a productive day!", p.parse("bye", t));
+        } catch (gary.GaryException e) {
+            System.out.println("testBye: error");
+        }
     }
 }
