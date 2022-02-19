@@ -23,13 +23,4 @@ public class GaryException extends Exception {
     public String garyError() {
         return "Sorry, what is " + this.msg;
     }
-
-    /**
-     * Prints out invalid input
-     *
-     * @return invalid input
-     */
-    public String getMessage() {
-        return msg;
-    }
 }

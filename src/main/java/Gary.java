@@ -1,9 +1,10 @@
 package gary;
 import gary.Storage;
-import gary.Ui;
 import gary.Parser;
 import gary.TaskList;
 import gary.GaryException;
+import javafx.fxml.FXML;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,7 +15,6 @@ public class Gary {
 
     private static Storage storage;
     protected static TaskList tasks;
-    private static Ui ui;
     protected static Parser parser;
 
     /**
@@ -23,10 +23,22 @@ public class Gary {
      * @param filePath file path to file containing history of chat-bot
      */
     public Gary(String filePath) {
-        ui = new Ui();
         storage = new Storage(filePath);
         parser = new Parser();
         tasks = new TaskList(storage.loadFile());
     }
 
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    protected String getResponse(String input) {
+        String resp;
+        try {
+            resp = parser.parse(input, tasks);
+        } catch (gary.GaryException e) {
+            return e.garyError();
+        }
+        return resp;
+    }
 }

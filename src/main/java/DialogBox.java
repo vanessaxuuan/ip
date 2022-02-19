@@ -1,65 +1,94 @@
 package gary;
 
-import javafx.geometry.Insets;
+import java.io.IOException;
+import java.util.Collections;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
-import javafx.scene.Node;
-import javafx.collections.ObservableList;
-import javafx.collections.FXCollections;
 import javafx.scene.shape.Circle;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.BackgroundFill;
+import java.awt.Color;
+import javafx.scene.layout.CornerRadii;
+import javafx.geometry.Insets;
+import javafx.scene.paint.Paint;
 
+import gary.MainWindow;
+
+/**
+ * An example of a custom control using FXML.
+ * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
+ * containing text from the speaker.
+ */
 public class DialogBox extends HBox {
-
-    private Label text;
+    @FXML
+    private Label dialog;
+    @FXML
     private ImageView displayPicture;
 
-    public DialogBox(Label l, ImageView iv) {
-        text = l;
-        displayPicture = iv;
+    private DialogBox(String text, Image img) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         // DialogBox background colour
-        Color shade = new Color(0.0,0.5,0.5,0.1);
+        //Color shade = new Color(0.0, 0.5 ,0.1 ,0.5);
         CornerRadii space = new CornerRadii(5);
         Insets offset = new Insets(5);
+        Paint shade = Paint.valueOf("rgba(50, 110, 110, 0.3)");
         BackgroundFill fill = new BackgroundFill(shade, space, offset);
         this.setBackground(new Background(fill));
 
         // clip imageView to Circle
-        Circle clip = new Circle(50, 50,50);
+        Circle clip = new Circle(42, 42,42);
+        displayPicture.setImage(img);
         displayPicture.setClip(clip);
-
-        text.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
-
-        this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text, displayPicture);
-        this.setSpacing(10);
-        this.setPadding(new Insets(10));
+        dialog.setText(text);
     }
 
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
     private void flip() {
-        this.setAlignment(Pos.TOP_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        FXCollections.reverse(tmp);
-        this.getChildren().setAll(tmp);
+        Collections.reverse(tmp);
+        getChildren().setAll(tmp);
+        setAlignment(Pos.TOP_LEFT);
     }
 
-    public static DialogBox getUserDialog(Label l, ImageView iv) {
-        return new DialogBox(l, iv);
+    /**
+     * Creates DialogBox for User
+     *
+     * @param text user input
+     * @param img user display picture
+     * @return DialogBox for user
+     */
+    public static DialogBox getUserDialog(String text, Image img) {
+        return new DialogBox(text, img);
     }
 
-    public static DialogBox getDukeDialog(Label l, ImageView iv) {
-        var db = new DialogBox(l, iv);
+    /**
+     * Creates DialogBox for Gary
+     *
+     * @param text gary's response
+     * @param img Gary display picture
+     * @return DialogBox for Gary
+     */
+    public static DialogBox getDukeDialog(String text, Image img) {
+        var db = new DialogBox(text, img);
         db.flip();
         return db;
     }
