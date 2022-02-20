@@ -2,8 +2,8 @@
 Gary is a desktop app for managing your daily to-do lists, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). 
 
 ## Features 
-1. Adding tasks: task_type
-2. Deleting tasks: delete
+1. [Adding tasks](https://github.com/vanessaxuuan/ip/blob/master/docs/README.md#adding-tasks): task_type
+2. [Deleting tasks](https://github.com/vanessaxuuan/ip/blob/master/docs/README.md#deleting-tasks): delete
 3. Finding related tasks: find
 4. Listing out tasks: list
 5. Viewing help: help
