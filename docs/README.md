@@ -4,11 +4,12 @@ Gary is a desktop app for managing your daily to-do lists, optimized for use via
 ## Features 
 1. [Adding tasks](https://github.com/vanessaxuuan/ip/blob/master/docs/README.md#adding-tasks): task_type
 2. [Deleting tasks](https://github.com/vanessaxuuan/ip/blob/master/docs/README.md#deleting-tasks): delete
-3. [Finding related](https://github.com/vanessaxuuan/ip/blob/master/docs/README.md#finding-related-tasks) tasks: find
+3. [Finding related tasks](https://github.com/vanessaxuuan/ip/blob/master/docs/README.md#finding-related-tasks): find
 4. [Listing out tasks](https://github.com/vanessaxuuan/ip/blob/master/docs/README.md#listing-out-tasks): list
 5. [Viewing help](https://github.com/vanessaxuuan/ip/blob/master/docs/README.md#viewing-help): help
 6. [Marking tasks](https://github.com/vanessaxuuan/ip/blob/master/docs/README.md#marking-and-un-marking-tasks): mark
 7. [Interactions](https://github.com/vanessaxuuan/ip/blob/master/docs/README.md#interactions) 
+
 
 ### 1. Adding Tasks
 
@@ -54,17 +55,20 @@ note: to delete multiple tasks at the same time, enter index in descending order
 
 Output: A lists of tasks containing the keyword
 
+
 ### 4. Listing out Tasks
 ```
 [list]
 ```
  Output: Current to-do list
  
+ 
 ### 5. Viewing Help
 ```
 [help]
 ```
 Output: command summary 
+
 
 ### 6. Marking and un-marking Tasks
 
@@ -83,6 +87,7 @@ outcome: e.g. T[X] errands
 ```
 note: can un-mark multiple tasks at the same time 
 outcome: e.g. T[ ] errands 
+
 
 ### 7. Interactions
 
