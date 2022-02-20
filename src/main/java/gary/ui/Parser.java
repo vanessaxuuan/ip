@@ -27,6 +27,10 @@ public class Parser {
             switch (theTask) {
                 case "bye":
                     return "Bye, have a productive day!";
+                case "hi":
+                case "hello":
+                case "hey":
+                    return theTask + "! Enter <help> if you're unfamiliar with me!";
                 case "todo":
                     return tsk.addTodo(input.substring(5));
                 case "event":

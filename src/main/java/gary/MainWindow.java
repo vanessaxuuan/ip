@@ -26,8 +26,8 @@ public class MainWindow extends AnchorPane {
 
     private Gary gary;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/DaUser.png"));
-    private Image garyImage = new Image(this.getClass().getResourceAsStream("/DaGary.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/user.png"));
+    private Image garyImage = new Image(this.getClass().getResourceAsStream("/gary2.png"));
 
     @FXML
     public void initialize() {
@@ -41,6 +41,8 @@ public class MainWindow extends AnchorPane {
      */
     public void setGary(Gary d) {
         gary = d;
+        dialogContainer.getChildren().add(
+                DialogBox.getWelcomeMessage(garyImage));
     }
 
     /**
