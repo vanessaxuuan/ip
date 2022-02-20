@@ -1,12 +1,16 @@
 package gary.gui;
 
 import gary.MainWindow;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -85,7 +89,7 @@ public class DialogBox extends HBox {
      * @param img Gary display picture
      * @return DialogBox for Gary
      */
-    public static DialogBox getDukeDialog(String text, Image img) {
+    public static DialogBox getGaryDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         return db;

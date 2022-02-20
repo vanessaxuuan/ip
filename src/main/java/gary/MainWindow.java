@@ -1,13 +1,16 @@
 package gary;
 
 import gary.gui.DialogBox;
+
 import javafx.fxml.FXML;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -31,7 +34,12 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Gary d) {
+    /**
+     * Set Gary from Main class
+     *
+     * @param d Gary to be used
+     */
+    public void setGary(Gary d) {
         gary = d;
     }
 
@@ -42,10 +50,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String userText = userInput.getText();
-        String dukeText = gary.getResponse(userInput.getText());
+        String garyText = gary.getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, userImage),
-                DialogBox.getDukeDialog(dukeText, garyImage)
+                DialogBox.getGaryDialog(garyText, garyImage)
         );
         userInput.clear();
     }

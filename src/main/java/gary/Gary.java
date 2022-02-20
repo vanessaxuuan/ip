@@ -25,8 +25,10 @@ public class Gary {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Function to generate Gary's response to user input
+     *
+     * @param input user input
+     * @return Gary's response
      */
     protected String getResponse(String input) {
         String resp;
