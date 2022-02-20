@@ -1,16 +1,13 @@
 package gary;
 
-import gary.Gary;
-import gary.MainWindow;
-import gary.DialogBox;
-import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
-import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import java.io.IOException;
+import gary.Gary;
+
 
 /**
  * A GUI for Gary using FXML

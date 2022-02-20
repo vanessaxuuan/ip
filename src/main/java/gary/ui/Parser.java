@@ -1,9 +1,6 @@
-package gary;
-import gary.ToDo;
-import gary.Event;
-import gary.Deadline;
-import gary.TaskList;
-import gary.GaryException;
+package gary.ui;
+import gary.exception.GaryException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;

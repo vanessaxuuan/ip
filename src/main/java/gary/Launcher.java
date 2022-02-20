@@ -1,5 +1,4 @@
 package gary;
-import gary.Main;
 import javafx.application.Application;
 
 /**

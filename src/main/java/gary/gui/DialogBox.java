@@ -1,27 +1,25 @@
-package gary;
+package gary.gui;
 
-import java.io.IOException;
-import java.util.Collections;
-
+import gary.MainWindow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
-import javafx.scene.layout.HBox;
-import javafx.scene.shape.Circle;
 import javafx.scene.layout.BackgroundFill;
-import java.awt.Color;
 import javafx.scene.layout.CornerRadii;
-import javafx.geometry.Insets;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 
-import gary.MainWindow;
+import java.io.IOException;
+import java.util.Collections;
 
 /**
  * An example of a custom control using FXML.

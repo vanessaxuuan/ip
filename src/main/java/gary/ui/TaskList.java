@@ -1,15 +1,11 @@
-package gary;
-import gary.ToDo;
-import gary.Event;
-import gary.Deadline;
-import gary.Task;
-import gary.GaryException;
-import gary.Storage;
-import gary.TaskList;
-import gary.GaryException;
+package gary.ui;
+import gary.exception.GaryException;
+import gary.task.Deadline;
+import gary.task.Event;
+import gary.task.Task;
+import gary.task.ToDo;
+
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Scanner;
 
 /**
  * Represents a list of tasks to be done by user

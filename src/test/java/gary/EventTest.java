@@ -1,8 +1,8 @@
 package gary;
-import gary.Event;
+import gary.task.Event;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Test for the correctness of gary.Event class

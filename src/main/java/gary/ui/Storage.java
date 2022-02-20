@@ -1,5 +1,5 @@
-package gary;
-import gary.Task;
+package gary.ui;
+import gary.task.Task;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;

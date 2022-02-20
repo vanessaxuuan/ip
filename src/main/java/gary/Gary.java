@@ -1,12 +1,8 @@
 package gary;
-import gary.Storage;
-import gary.Parser;
-import gary.TaskList;
-import gary.GaryException;
-import javafx.fxml.FXML;
-
-import java.util.ArrayList;
-import java.util.Scanner;
+import gary.exception.GaryException;
+import gary.ui.Parser;
+import gary.ui.Storage;
+import gary.ui.TaskList;
 
 /**
  * Represents a chat-bot that manages your daily to-do list
@@ -36,7 +32,7 @@ public class Gary {
         String resp;
         try {
             resp = parser.parse(input, tasks);
-        } catch (gary.GaryException e) {
+        } catch (GaryException e) {
             return e.garyError();
         }
         return resp;

@@ -1,4 +1,4 @@
-package gary;
+package gary.exception;
 import java.lang.Exception;
 
 /**

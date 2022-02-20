@@ -1,5 +1,4 @@
-package gary;
-import gary.Task;
+package gary.task;
 
 /**
  * Represents a Task that happens on a specific day/time

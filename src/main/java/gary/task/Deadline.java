@@ -1,6 +1,4 @@
-package gary;
-import gary.Task;
-
+package gary.task;
 /**
  * Represents a Task that entails a deadline
  * A completed DeadLine e.g. D[X] deadline_name by: 19-01-2022 10:30pm

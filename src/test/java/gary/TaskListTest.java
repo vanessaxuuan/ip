@@ -1,17 +1,18 @@
 package gary;
-import gary.Task;
-import gary.GaryException;
+import gary.exception.GaryException;
+import gary.ui.TaskList;
 import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Test for the correctness of gary.TaskList class
  */
 public class TaskListTest {
     private ArrayList<String> commands;
-    private gary.TaskList lst;
+    private TaskList lst;
 
     /**
      * Check if gary.TaskList.invoke() is able to detect invalid input
@@ -21,7 +22,7 @@ public class TaskListTest {
         try {
             commands = new ArrayList<>();
             commands.add("3. E[ ] party on: 12 Dec 2001 22:30 pm");
-            lst = new gary.TaskList(commands);
+            lst = new TaskList(commands);
             lst.invoke("hello");
         } catch (GaryException e) {
             assertEquals("hello", e.getMessage());
