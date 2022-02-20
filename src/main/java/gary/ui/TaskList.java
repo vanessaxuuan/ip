@@ -61,22 +61,26 @@ public class TaskList {
      * @throws GaryException if method is invalid
      */
     public String invoke(String input) throws GaryException {
-        String[] type = input.split(" ");
-        switch (type[0]) {
-            case "list":
-                return this.showList(2);
-            case "mark":
-                return this.mark(input);
-            case "unmark":
-                return this.unmark(input);
-            case "delete":
-                return this.delete(input);
-            case "help":
-                return showHelp();
-            case "refresh":
-                return deleteAll();
-            default:
-                throw new GaryException(input);
+        try {
+            String[] type = input.split(" ");
+            switch (type[0]) {
+                case "list":
+                    return this.showList(2);
+                case "mark":
+                    return this.mark(input);
+                case "unmark":
+                    return this.unmark(input);
+                case "delete":
+                    return this.delete(input);
+                case "help":
+                    return this.showHelp();
+                case "refresh":
+                    return this.deleteAll();
+                default:
+                    throw new GaryException(input);
+            }
+        } catch (AssertionError e) {
+            return "Your To-Do List is empty! :0";
         }
     }
 
@@ -142,17 +146,16 @@ public class TaskList {
      * Deletes unnecessary tasks
      */
     public String delete(String input) {
+        assert !tasks.isEmpty();
         String[] seq = input.split(" ");
         try {
             int len = seq.length;
             for(int i = 1; i < len; i++) {
                 tasks.remove(Integer.parseInt(seq[i]) - 1);
             }
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("Ah please enter a valid number or sequence e.g. 5 3 1");
-        }
-        if(!tasks.isEmpty()) {
             Storage.saveTask(tasks);
+        } catch (IndexOutOfBoundsException e) {
+            return "Ah please enter a valid number or sequence e.g. 5 3 1";
         }
         return "Done!";
     }
@@ -161,6 +164,7 @@ public class TaskList {
      * Marks completed task as done
      */
     public String mark(String input) {
+        assert !tasks.isEmpty();
         String[] seq = input.split(" ");
         int len = seq.length;
         for(int i = 1; i < len; i++) {
@@ -174,6 +178,7 @@ public class TaskList {
      * Undo marking
      */
     public String unmark(String input) {
+        assert !tasks.isEmpty();
         String[] seq = input.split(" ");
         int len = seq.length;
         for(int i = 1; i < len; i++) {
@@ -223,6 +228,7 @@ public class TaskList {
     }
 
     public String deleteAll() {
+        assert !tasks.isEmpty();
         tasks.clear();
         Storage.saveTask(tasks);
         return "To-Do List cleared! What would you like to do today? ^^";

@@ -36,6 +36,8 @@ public class Gary {
             resp = parser.parse(input, tasks);
         } catch (GaryException e) {
             return e.garyError();
+        } catch (AssertionError e) {
+            return "Sorry... What do you need to do again?";
         }
         return resp;
     }
