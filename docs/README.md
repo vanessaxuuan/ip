@@ -4,13 +4,13 @@ Gary is a desktop app for managing your daily to-do lists, optimized for use via
 ## Features 
 1. [Adding tasks](https://github.com/vanessaxuuan/ip/blob/master/docs/README.md#adding-tasks): task_type
 2. [Deleting tasks](https://github.com/vanessaxuuan/ip/blob/master/docs/README.md#deleting-tasks): delete
-3. Finding related tasks: find
-4. Listing out tasks: list
-5. Viewing help: help
-6. Marking tasks: mark
-7. Interactions 
+3. [Finding related](https://github.com/vanessaxuuan/ip/blob/master/docs/README.md#finding-related-tasks) tasks: find
+4. [Listing out tasks](https://github.com/vanessaxuuan/ip/blob/master/docs/README.md#listing-out-tasks): list
+5. [Viewing help](https://github.com/vanessaxuuan/ip/blob/master/docs/README.md#viewing-help): help
+6. [Marking tasks](https://github.com/vanessaxuuan/ip/blob/master/docs/README.md#marking-and-un-marking-tasks): mark
+7. [Interactions](https://github.com/vanessaxuuan/ip/blob/master/docs/README.md#interactions) 
 
-### Adding Tasks
+### 1. Adding Tasks
 
 ##### Adding different types of Task to your to-do list:
 
@@ -32,7 +32,7 @@ Gary is a desktop app for managing your daily to-do lists, optimized for use via
 [deadline name / dd-mm-yyyy,hhmm] e.g. deadline lab4 / 05-12-2022,1400
 ```
 
-### Deleting Tasks
+### 2. Deleting Tasks
 
 ##### Delete Task(s)
 
@@ -48,22 +48,22 @@ note: enter index in descending order
 [refresh]
 ```
 
-### Finding related Tasks
+### 3. Finding related Tasks
 ```
 [find keyword] e.g. find assignment
 ```
 
-### Listing out Tasks
+### 4. Listing out Tasks
 ```
 [list]
 ```
  
-### Viewing Help
+### 5. Viewing Help
 ```
 [help]
 ```
 
-### Marking and un-marking Tasks
+### 6. Marking and un-marking Tasks
 
 ##### Mark task(s) as done
 
@@ -80,7 +80,7 @@ note: can un-mark multiple tasks at the same time
 ```
 
 
-### Interactions
+### 7. Interactions
 
 Input:
 ```
