@@ -38,9 +38,8 @@ Gary is a desktop app for managing your daily to-do lists, optimized for use via
 
 ```
 [delete index ...] e.g. delete 5 3 1
-note: enter index in descending order
-
 ```
+note: enter index in descending order
 
 ##### Delete all Tasks
 
@@ -69,16 +68,15 @@ note: enter index in descending order
 
 ```
 [mark index ...] e.g. mark 1 4 2
-note: can mark multiple tasks at the same time 
 ```
+note: can mark multiple tasks at the same time 
 
 ##### Mark task(s) as not done
 
 ```
 [unmark index ...] e.g. mark 1 4 2
-note: can un-mark multiple tasks at the same time 
 ```
-
+note: can un-mark multiple tasks at the same time 
 
 ### 7. Interactions
 
