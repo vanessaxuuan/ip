@@ -189,9 +189,9 @@ public class TaskList {
     }
 
     /**
-     * Print out Tasks that contains keyword
+     * Print out Tasks that contains keyword even partially
      *
-     * @param keyword
+     * @param keyword used to find related tasks
      */
     public String find(String keyword) {
         String end = "Here are the matching tasks in your list:" + System.lineSeparator();
