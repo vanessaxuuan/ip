@@ -78,6 +78,7 @@ Output: command summary
 [mark index ...] e.g. mark 1 4 2
 ```
 note: can mark multiple tasks at the same time 
+
 outcome: e.g. T[X] errands 
 
 ##### Mark task(s) as not done
@@ -86,6 +87,7 @@ outcome: e.g. T[X] errands
 [unmark index ...] e.g. unmark 1 5 2
 ```
 note: can un-mark multiple tasks at the same time 
+
 outcome: e.g. T[ ] errands 
 
 
