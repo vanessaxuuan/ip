@@ -1,20 +1,12 @@
 package gary.gui;
 
 import gary.MainWindow;
-
-import java.io.IOException;
-import java.util.Collections;
-import java.util.List;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -24,7 +16,6 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -51,18 +42,14 @@ public class DialogBox extends HBox {
         }
 
         // DialogBox background colour
-        //Color shade = new Color(0.0, 0.5 ,0.1 ,0.5);
         CornerRadii space = new CornerRadii(5);
         Insets offset = new Insets(5);
         Paint shade = Paint.valueOf("rgba(50, 110, 110, 0.3)");
         BackgroundFill fill = new BackgroundFill(shade, space, offset);
         this.setBackground(new Background(fill));
 
-        // clip imageView to Circle
-        Circle clip = new Circle(42, 42,42);
-        displayPicture.setImage(img);
-        displayPicture.setClip(clip);
-        dialog.setText(text);
+          dialog.setText(text);
+          displayPicture.setImage(img);
     }
 
     /**
@@ -73,6 +60,17 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+    }
+
+    /**
+     *
+     * @param img
+     * @return
+     */
+    public static DialogBox getWelcomeMessage(Image img) {
+        var db = new DialogBox("  Gary here~", img);
+        db.flip();
+        return db;
     }
 
     /**

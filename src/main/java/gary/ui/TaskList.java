@@ -90,7 +90,7 @@ public class TaskList {
      * @param x type of message to be printed
      */
     public String showList(int x) {
-        String msg = x == 1 ? "Welcome back, this is your current to-do list:" : "to do list:";
+        String msg = x == 1 ? "This is your current to-do list:" : "to do list:";
         if (this.tasks.isEmpty()) {
             return "No history recorded, what would you like to do today?";
         } else {
@@ -148,14 +148,25 @@ public class TaskList {
     public String delete(String input) {
         assert !tasks.isEmpty();
         String[] seq = input.split(" ");
+        String out = "";
         try {
             int len = seq.length;
+            int prev = len; // max
             for(int i = 1; i < len; i++) {
-                tasks.remove(Integer.parseInt(seq[i]) - 1);
+                int curr = Integer.parseInt(seq[i]) - 1;
+                int check = prev - curr;
+                // maintain descending order
+                assert check > 0;
+                tasks.remove(curr);
+                prev = curr;
             }
             Storage.saveTask(tasks);
         } catch (IndexOutOfBoundsException e) {
-            return "Ah please enter a valid number or sequence e.g. 5 3 1";
+            return "Please enter a valid number or sequence e.g. 5 3 1" + System.lineSeparator()
+                    + this.showList(1);
+        } catch (AssertionError e) {
+            return "Something went wrong... please enter tasks in descending order! e.g. 5 3 1"
+                    + System.lineSeparator() + this.showList(1);
         }
         return "Done!";
     }
@@ -199,7 +210,7 @@ public class TaskList {
         for(Task t : tasks) {
             if (t.contain(keyword)) {
                 i++;
-                end += t.toString() + System.lineSeparator();
+                end +=  i + ". " + t.toString() + System.lineSeparator();
             }
         }
         if (i == 0) {
@@ -223,7 +234,7 @@ public class TaskList {
         help += "[refresh]: delete all tasks" + System.lineSeparator();
         help += "[mark 2 3]: indicating tasks 2 & 3 as done" + System.lineSeparator();
         help += "[unmark 2 3]: indicating tasks 2 & 3 as incomplete (default)" + System.lineSeparator();
-        help += "[find key word]: find tasks related to keyword(s)";
+        help += "[find key word]: find tasks related to keyword(s)" + System.lineSeparator();
         return help;
     }
 
