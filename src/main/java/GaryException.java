@@ -21,6 +21,7 @@ public class GaryException extends Exception {
      * Prints out error message
      */
     public String garyError() {
+        assert !msg.isBlank();
         return "Sorry, what is " + this.msg;
     }
 }

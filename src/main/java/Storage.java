@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+import java.io.FileOutputStream;
 
 /**
  * Represents a storage for files used by Gary
@@ -51,15 +52,21 @@ public class Storage {
      */
     public static void saveTask(ArrayList<Task> list) {
         try {
-            FileWriter fw = new FileWriter(file);
-            fw.write("1. " + list.get(0).toString() + System.lineSeparator()); // overwrite first line
-            fw.close();
-            FileWriter fw2 = new FileWriter(file, true);
-            int len = list.size();
-            for (int i = 1; i < len; i++) {
-                fw2.write(i + 1 + ". " + list.get(i).toString() + System.lineSeparator()); // append
+            if (list.isEmpty()) {
+                FileWriter fw = new FileWriter(file);
+                fw.write(" ");
+                fw.close();
+            } else {
+                FileWriter fw = new FileWriter(file);
+                fw.write("1. " + list.get(0).toString() + System.lineSeparator()); // overwrite first line
+                fw.close();
+                FileWriter fw2 = new FileWriter(file, true);
+                int len = list.size();
+                for (int i = 1; i < len; i++) {
+                    fw2.write(i + 1 + ". " + list.get(i).toString() + System.lineSeparator()); // append
+                }
+                fw2.close();
             }
-            fw2.close();
         } catch (IOException e) {
             System.out.println("No file to save into???");
         }

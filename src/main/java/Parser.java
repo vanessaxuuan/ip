@@ -13,7 +13,6 @@ import java.time.format.DateTimeParseException;
  * invoke the corresponding operation to be done
  */
 public class Parser {
-    private static String command = "";
 
     /**
      * Parse user input
@@ -23,6 +22,7 @@ public class Parser {
      * @return indication to end of user input
      */
     public String parse(String input, TaskList tsk) throws GaryException {
+        assert !input.isBlank(); // catches empty input
         try {
             String[] type = input.split(" ");
             String theTask = type[0];
@@ -41,9 +41,9 @@ public class Parser {
                     return tsk.find(input.substring(5));
             }
         } catch (StringIndexOutOfBoundsException e) {
-            System.out.println("Ah please enter a valid description e.g. task_type name / date");
+            return "Ah please enter a valid description e.g. task_type name / date";
         } catch (DateTimeParseException e) {
-            System.out.println("Ah please enter a valid date e.g. 19-01-2022,2359");
+            return "Ah please enter a valid date e.g. 19-01-2022,2359";
         }
         return tsk.invoke(input);
     }
