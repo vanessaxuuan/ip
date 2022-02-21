@@ -47,14 +47,22 @@ application {
     mainClassName = "gary.Launcher"
 }
 
-shadowJar {
-    archiveBaseName = "gary"
-    archiveClassifier = null
+//shadowJar {
+//    archiveBaseName = "Launcher"
+//    archiveClassifier = null
+//}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'gary.Launcher'
+        )
+    }
 }
 
-checkstyle {
-    toolVersion = '8.29'
-}
+//checkstyle {
+//    toolVersion = '8.29'
+//}
 
 run{
     enableAssertions = true
