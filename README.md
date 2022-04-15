@@ -19,7 +19,7 @@ All you need to do is,
 
 Features:
 - [x] Managing tasks
-- [ ] Managing deadlines (coming soon)
+- [x] Managing deadlines (coming soon)
 - [ ] Reminders (coming soon)
 
 If you Java programmer, you can use it to practice Java too. Here's the **main** method:
